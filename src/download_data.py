@@ -12,7 +12,7 @@ Options:
 --extract_to=<extract_to>   The path where the file is to be unzipped to in the repository.
 
 Example:
-# python download_data.py --url="https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-datahttps://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data/download?datasetVersionNumber=3" --extract_to="../data/raw/data.csv"
+# python src/download_data.py --url="https://raw.githubusercontent.com/ranjitprakash1986/datasets/main/AB_NYC_2019.csv" --extract_to="data/raw/data.csv"
 """
 
 # imports
@@ -41,7 +41,7 @@ def main(url, extract_to):
 
     Example:
     -------
-    >>> main("https://github.com/ranjitprakash1986/datasets/blob/main/AB_NYC_2019.csv" ,"../data/raw/data.csv")
+    >>> main("https://raw.githubusercontent.com/ranjitprakash1986/datasets/main/AB_NYC_2019.csv" ,"data/raw/data.csv")
     """
 
     # Try catch to check if the url is valid
@@ -54,7 +54,7 @@ def main(url, extract_to):
         print(req)
         print("URL invalid")
     
-    data = pd.read_csv(url, sep=',', lineterminator='\r')
+    data = pd.read_csv(url, sep=',')
 
     # Save the file to the target path
     try:
