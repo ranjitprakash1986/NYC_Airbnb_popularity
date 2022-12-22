@@ -19,7 +19,7 @@ Example:
 
 import os
 import pandas as pd
-import docopt as docopt
+from docopt import docopt
 import requests
 import urllib
 import zipfile
@@ -41,12 +41,12 @@ def main(url, extract_to):
 
     Example:
     -------
-    >>> main("https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-datahttps://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data/download?datasetVersionNumber=3" ,"../data/raw/data.csv")
+    >>> main("https://github.com/ranjitprakash1986/datasets/blob/main/AB_NYC_2019.csv" ,"../data/raw/data.csv")
     """
 
     # Try catch to check if the url is valid
     try:
-        print("Checing URL")
+        print("Checking URL")
         request = requests.get(url)
         if request.status_code == 200:
             print("URL valid")
@@ -54,18 +54,17 @@ def main(url, extract_to):
         print(req)
         print("URL invalid")
     
+    data = pd.read_csv(url, sep=',', lineterminator='\r')
 
-    # Try catch to downloada and extract the file
+    # Save the file to the target path
     try:
-        zip_path, _ = urllib.request.urlretrieve(url)
-        with zipfile.ZipFile(zip_path, "r") as f:
-            f.extractall(extract_to)
-        print("File downloaded and extracted successfull")
+        print("Saving CSV started")
+        data.to_csv(extract_to, index=False)
+        print("Save Completed")
     except:
         os.makedirs(os.path.dirname(extract_to))
-        with zipfile.ZipFile(zip_path, "r") as f:
-            f.extractall(extract_to)
-        print("File downloaded and extracted successfull")
+        data.to_csv(extract_to, index=False)
+        print("New folder created and save completed")
 
 if __name__ == "__main__":
     main(opt["--url"], opt["--extract_to"])
