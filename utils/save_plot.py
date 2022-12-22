@@ -12,8 +12,6 @@ Options:
 
 # code adapted from DSCI-531 Data Visualization I
 
-from altair_saver import save  # to save the altair charts in svg format
-
 
 def save_chart(chart, filename, scale_factor=1):
     """
@@ -29,6 +27,12 @@ def save_chart(chart, filename, scale_factor=1):
         The factor to scale the image resolution by.
         E.g. A value of `2` means two times the default resolution.
     """
+    from altair_saver import save  # to save the altair charts in svg format
+    import altair as alt
+
+    alt.renderers.enable("mimetype")
+    alt.data_transformers.disable_max_rows()
+
     if filename.split(".")[-1] == "svg":
         save(chart, filename)
     else:
