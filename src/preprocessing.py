@@ -5,15 +5,14 @@
 Script to process the raw data and split into train and test
 These are stored in data/processed folder
 
-Usage: src/preprocessing.py --input_path=<input_path> --test_size=<test_size> --output_path=<output_path>
+Usage: src/preprocessing.py --input_file=<input_file> --output_path=<output_path>
 
 Options:
---input_path=<input_path>   Input path where the preprocessed data is present
---test_size=<test_size>     Size of the test datset as fraction of the dataset
---output_path=<output_path> Path where the output plots are to be stored
+--input_file=<input_file>   Input file which represents the raw data
+--output_path=<output_path> Path where the output processed data is to be stored
 
 Example:
->>>python src/preprocessing.py --input_path="data/raw/data.csv" --test_size=0.2 --output_path="data/processed/"
+>>>python src/preprocessing.py --input_file="data/raw/data.csv" --output_path="data/processed/"
 """
 
 
@@ -36,11 +35,10 @@ from sklearn.compose import (
 opt = docopt(__doc__)
 
 
-def preprocess(df, test_size, output_path):
+def preprocess(df, output_path):
     """
     Perform the processing of raw data
-    and split into train and test data
-
+    
     Parameters:
     ----------
     df: Pandas Dataframe that contains the raw data
@@ -89,26 +87,39 @@ def preprocess(df, test_size, output_path):
     df = df.assign(
         host_name_mod=df["host_name"].apply(lambda x: "other" if x in name_other else x)
     )
-
-    # Splitting the data
-    train_df, test_df = train_test_split(df, test_size=test_size, random_state=573)
-
-    # Storing the data
+    
+    # Storing the processed data
     try:
-        train_df.to_csv(output_path + "train_eda.csv", index=False)
-        test_df.to_csv(output_path + "test.csv", index=False)
+        df.to_csv(output_path + "processed_data.csv", index=False)
     except:
         os.makedirs(os.path.dirname(output_path))
-        train_df.to_csv(output_path + "train.csv", index=False)
-        test_df.to_csv(output_path + "test.csv", index=False)
-
+        df.to_csv(output_path + "processed_data.csv", index=False)
+        
     # Display message
     print(
-        "Raw data was processed and split into train and test data in destination folder"
+        "Raw data was processed and saved in destination folder"
     )
+    
+
+#     # Splitting the data
+#     train_df, test_df = train_test_split(df, test_size=test_size, random_state=573)
+
+#     # Storing the data
+#     try:
+#         train_df.to_csv(output_path + "train_eda.csv", index=False)
+#         test_df.to_csv(output_path + "test.csv", index=False)
+#     except:
+#         os.makedirs(os.path.dirname(output_path))
+#         train_df.to_csv(output_path + "train.csv", index=False)
+#         test_df.to_csv(output_path + "test.csv", index=False)
+
+#     # Display message
+#     print(
+#         "Raw data was processed and split into train and test data in destination folder"
+#     )
 
 
-def main(input_path, test_size, output_path):
+def main(input_file, output_path):
     """
     Main function to tie all processing together
 
@@ -122,14 +133,14 @@ def main(input_path, test_size, output_path):
 
     # Read the data
     print("Reading raw data")
-    df = pd.read_csv(input_path)
+    df = pd.read_csv(input_file)
     print("Reading raw data completed\n" + "=" * 50)
 
     # Call the function for preprocessing
     print("Preprocessing starting")
-    preprocess(df, float(test_size), output_path)
+    preprocess(df, output_path)
     print("Preprocessing completed\n" + "=" * 50)
 
 
 if __name__ == "__main__":
-    main(opt["--input_path"], opt["--test_size"], opt["--output_path"])
+    main(opt["--input_file"], opt["--output_path"])
