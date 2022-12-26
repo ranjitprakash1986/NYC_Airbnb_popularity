@@ -1,0 +1,5 @@
+,hyperparameter,Value
+0,lgbmregressor__num_leaves,200.0
+1,lgbmregressor__n_estimators,1000.0
+2,lgbmregressor__max_depth,9.0
+3,lgbmregressor__learning_rate,0.1

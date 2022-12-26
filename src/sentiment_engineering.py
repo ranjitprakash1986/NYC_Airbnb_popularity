@@ -61,6 +61,7 @@ def main(inp_file, output_path, text_col):
     df = pd.read_csv(inp_file)
 
     # Perform the sentiment analysis
+    print("Starting sentiment analysis of the data")
     df = df.assign(vader_sentiment=df[text_col].apply(get_sentiment))
 
     # Storing the enhanced data

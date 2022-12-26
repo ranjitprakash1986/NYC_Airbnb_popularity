@@ -1,0 +1,5 @@
+,Score_Name,Score
+0,lgbmregressor_r2_score_train_,0.8776705802867052
+1,lgbmregressor_r2_score_test,0.6784637043450905
+2,lgbmregressor_rmse_train,0.5877326595141912
+3,lgbmregressor_rmse_test,0.9525691707318139
