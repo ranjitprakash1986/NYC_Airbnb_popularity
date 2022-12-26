@@ -1,0 +1,2 @@
+,fit_time,score_time,test_score,train_score
+best_lgbm,3.734 (+/- 0.111),0.510 (+/- 0.034),0.662 (+/- 0.025),0.880 (+/- 0.021)
