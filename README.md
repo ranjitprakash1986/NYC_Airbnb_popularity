@@ -1,4 +1,4 @@
-# Breast Cancer Predictor
+# NYC Airbnb Popularity Predictor
 
   - author: Ranjitprakash Sundaramurthi
   - contributors: Andy Wang
