@@ -119,8 +119,8 @@ def allmodels(X_train, y_train, out_dir):
         "linearregression": LinearRegression(),
         "ridgecv":RidgeCV(alphas=alphas, cv=10),
         "lasso": Lasso(alpha=0.1),
-        "decision tree": DecisionTreeRegressor(),
-        "random forest":RandomForestRegressor(),
+        "decision_tree": DecisionTreeRegressor(),
+        "random_forest":RandomForestRegressor(),
         "GradientBoosting": GradientBoostingRegressor(),
         "lgbm": LGBMRegressor(),
         "xgboost": XGBRegressor()

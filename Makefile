@@ -27,11 +27,11 @@ data/processed/train.csv data/processed/test.csv results/distribution_plot_revie
 	python src/general_EDA.py --input_file="data/processed/processed_sentiment_data.csv" --output_data="data/processed/" --target_col="reviews_per_month"
 
 # Analysis
-results/allmodel_train_results.csv results/best_parameters_lgbm.csv results/lgbmregressor_training_results.csv results/model_decision tree  results/model_GradientBoosting results/model_lasso results/model_lgbm results/model_lgbmregressor results/model_linearregression results/model_random forest results/model_ridgecv results/model_xgboost results/model_scores.csv: data/processed/train.csv data/processed/test.csv src/analysis.py
+results/allmodel_train_results.csv: data/processed/train.csv data/processed/test.csv src/analysis.py
 	python src/analysis.py --train_file="data/processed/train.csv" --test_file="data/processed/test.csv" --output_dir="results/"
 
 # Render html report
-doc/NYC_Airbnb_popularity_predictor.html: doc/NYC_Airbnb_popularity_predictor.Rmd doc/NYC_Airbnb_refs.bib esults/allmodel_train_results.csv results/best_parameters_lgbm.csv results/lgbmregressor_training_results.csv results/model_decision tree  results/model_GradientBoosting results/model_lasso results/model_lgbm results/model_lgbmregressor results/model_linearregression results/model_random forest results/model_ridgecv results/model_xgboost results/model_scores.csv
+doc/NYC_Airbnb_popularity_predictor.html: doc/NYC_Airbnb_popularity_predictor.Rmd doc/NYC_Airbnb_refs.bib results/allmodel_train_results.csv results/best_parameters_lgbm.csv results/lgbmregressor_training_results.csv results/model_decision_tree  results/model_GradientBoosting results/model_lasso results/model_lgbm results/model_lgbmregressor results/model_linearregression results/model_random_forest results/model_ridgecv results/model_xgboost results/model_scores.csv
 	Rscript -e "rmarkdown::render('doc/NYC_Airbnb_popularity_predictor.Rmd')"
 
 clean: 
